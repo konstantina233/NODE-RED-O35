@@ -5,10 +5,13 @@
 
 Για να εισαγάγετε αυτόν τον κώδικα στο Node-RED:
 
+0. Πραγματοποιήστε λήψη και εγκατάσταση του περιβάλλοντος Node-RED, ακολουθώντας τις οδηγίες από την επίσημη τεκμηρίωση. Εάν το έχετε ήδη εγκαταστήσει, βεβαιωθείτε ότι η υπηρεσία εκτελείται κανονικά.Τις οδηγίες μπορείτε να τις βρείτε στο link: https://nodered.org/docs/getting-started/
 1. **Αντιγράψτε** τον JSON κώδικα.
 2. Στο workspace του Node-RED, ανοίξτε το κεντρικό μενού (εικονίδιο **☰**) στην επάνω δεξιά γωνία, ακριβώς δίπλα από το κουμπί **Deploy**.
 3. Επιλέξτε **Import**.
 4. Κάντε επικόλληση (Paste) τον κώδικα στο πεδίο και πατήστε το κουμπί **Import** στο κάτω μέρος του αναδυόμενου παραθύρου.
+5. Πατήστε **Deploy** .
+6. Στο Flow με όνομα εισαγωγή δεδομένων, πατήστε το **timestamp** .
 ```json
 [
     {
@@ -143,7 +146,7 @@
             },
             {
                 "t": "eq",
-                "v": "πόρτα σπιτιού",
+                "v": "κίνηση",
                 "vt": "str"
             },
             {
@@ -1323,352 +1326,6 @@
         "wires": []
     },
     {
-        "id": "012e4653836b477b",
-        "type": "tab",
-        "label": "πορτα ψυγειου",
-        "disabled": false,
-        "info": "",
-        "env": []
-    },
-    {
-        "id": "b097375da683ce23",
-        "type": "inject",
-        "z": "012e4653836b477b",
-        "name": "Πόρτα άνοιξε (Ψυγείο)",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "open",
-        "payload": "",
-        "payloadType": "date",
-        "x": 300,
-        "y": 640,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "41cdb9043f9e18c0",
-        "type": "inject",
-        "z": "012e4653836b477b",
-        "name": "Πόρτα έκλεισε",
-        "props": [
-            {
-                "p": "payload"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "closed",
-        "payloadType": "str",
-        "x": 290,
-        "y": 720,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "0838139a1dc2de8a",
-        "type": "trigger",
-        "z": "012e4653836b477b",
-        "name": "",
-        "op1": "",
-        "op2": "Κλείσε την πόρτα.",
-        "op1type": "nul",
-        "op2type": "str",
-        "duration": "1",
-        "extend": false,
-        "overrideDelay": false,
-        "units": "s",
-        "reset": "closed",
-        "bytopic": "all",
-        "topic": "topic",
-        "outputs": 1,
-        "x": 520,
-        "y": 360,
-        "wires": [
-            [
-                "671b967b7d27a670",
-                "3ee212dc7ee0c5e9"
-            ]
-        ]
-    },
-    {
-        "id": "59e0e17481ba02cf",
-        "type": "change",
-        "z": "012e4653836b477b",
-        "name": "",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "Η πόρτα μόλις έκλεισε",
-                "tot": "str"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 460,
-        "y": 480,
-        "wires": [
-            [
-                "9ee3e67810a575c4",
-                "c281f38afcd0647d"
-            ]
-        ]
-    },
-    {
-        "id": "671b967b7d27a670",
-        "type": "ui_audio",
-        "z": "012e4653836b477b",
-        "name": "",
-        "group": "a9fa5578717d132e",
-        "voice": "Microsoft Stefanos - Greek (Greece)",
-        "always": true,
-        "x": 780,
-        "y": 360,
-        "wires": []
-    },
-    {
-        "id": "9ee3e67810a575c4",
-        "type": "ui_audio",
-        "z": "012e4653836b477b",
-        "name": "",
-        "group": "a9fa5578717d132e",
-        "voice": "Microsoft Stefanos - Greek (Greece)",
-        "always": true,
-        "x": 760,
-        "y": 520,
-        "wires": []
-    },
-    {
-        "id": "f4689fdcef459158",
-        "type": "ui_toast",
-        "z": "012e4653836b477b",
-        "position": "top right",
-        "displayTime": "3",
-        "highlight": "",
-        "sendall": true,
-        "outputs": 0,
-        "ok": "OK",
-        "cancel": "",
-        "raw": false,
-        "className": "",
-        "topic": "",
-        "name": "",
-        "x": 950,
-        "y": 720,
-        "wires": []
-    },
-    {
-        "id": "28ef3a1816c002e1",
-        "type": "link in",
-        "z": "012e4653836b477b",
-        "name": "link in 12",
-        "links": [
-            "1bcddda4d2cb38f0"
-        ],
-        "x": 25,
-        "y": 340,
-        "wires": [
-            [
-                "c10f4a60b5bf363e"
-            ]
-        ]
-    },
-    {
-        "id": "49506f94e072874c",
-        "type": "switch",
-        "z": "012e4653836b477b",
-        "name": "",
-        "property": "payload",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "1",
-                "vt": "str"
-            },
-            {
-                "t": "eq",
-                "v": "0",
-                "vt": "str"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 2,
-        "x": 290,
-        "y": 340,
-        "wires": [
-            [
-                "95db2c6eccce1d89",
-                "0838139a1dc2de8a"
-            ],
-            [
-                "59e0e17481ba02cf"
-            ]
-        ]
-    },
-    {
-        "id": "c10f4a60b5bf363e",
-        "type": "change",
-        "z": "012e4653836b477b",
-        "name": "",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "payload.value",
-                "tot": "msg"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 140,
-        "y": 340,
-        "wires": [
-            [
-                "49506f94e072874c"
-            ]
-        ]
-    },
-    {
-        "id": "95db2c6eccce1d89",
-        "type": "change",
-        "z": "012e4653836b477b",
-        "name": "",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "Η πόρτα του ψυγείου ανοιξε!",
-                "tot": "str"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 660,
-        "y": 220,
-        "wires": [
-            [
-                "03c6ac0ecbb69ca0"
-            ]
-        ]
-    },
-    {
-        "id": "0dabc8bf38ca7ed4",
-        "type": "debug",
-        "z": "012e4653836b477b",
-        "name": "debug 2",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1080,
-        "y": 220,
-        "wires": []
-    },
-    {
-        "id": "8a50a9cf37c42b43",
-        "type": "debug",
-        "z": "012e4653836b477b",
-        "name": "debug 5",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1080,
-        "y": 440,
-        "wires": []
-    },
-    {
-        "id": "03c6ac0ecbb69ca0",
-        "type": "template",
-        "z": "012e4653836b477b",
-        "name": "",
-        "field": "payload",
-        "fieldType": "msg",
-        "format": "handlebars",
-        "syntax": "mustache",
-        "template": "Time:{{{global.timestamp}}}  {{payload}}",
-        "output": "str",
-        "x": 920,
-        "y": 220,
-        "wires": [
-            [
-                "0dabc8bf38ca7ed4"
-            ]
-        ]
-    },
-    {
-        "id": "c281f38afcd0647d",
-        "type": "template",
-        "z": "012e4653836b477b",
-        "name": "",
-        "field": "payload",
-        "fieldType": "msg",
-        "format": "handlebars",
-        "syntax": "mustache",
-        "template": "Time:{{{global.timestamp}}}  {{payload}}",
-        "output": "str",
-        "x": 920,
-        "y": 440,
-        "wires": [
-            [
-                "8a50a9cf37c42b43"
-            ]
-        ]
-    },
-    {
-        "id": "3ee212dc7ee0c5e9",
-        "type": "debug",
-        "z": "012e4653836b477b",
-        "name": "debug 8",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 730,
-        "y": 280,
-        "wires": []
-    },
-    {
         "id": "8da9c22f90d38586",
         "type": "tab",
         "label": "Smart AC (Διορθωμένο CSV)",
@@ -2000,6 +1657,313 @@
         "wires": []
     },
     {
+        "id": "d838b4da5bd7b4ee",
+        "type": "tab",
+        "label": "πορτα ψυγειου",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "f7e4a181c38014bb",
+        "type": "trigger",
+        "z": "d838b4da5bd7b4ee",
+        "name": "",
+        "op1": "Η πόρτα μόλις άνοιξε.",
+        "op2": "Κλείσε την πόρτα του ψυγείου.",
+        "op1type": "str",
+        "op2type": "str",
+        "duration": "5",
+        "extend": false,
+        "overrideDelay": false,
+        "units": "s",
+        "reset": "0",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 520,
+        "y": 280,
+        "wires": [
+            [
+                "9d361afe200cb84f",
+                "3efab4a79ab1c2cc"
+            ]
+        ]
+    },
+    {
+        "id": "a2665792c2f9bb5b",
+        "type": "change",
+        "z": "d838b4da5bd7b4ee",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Η πόρτα μόλις έκλεισε",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 460,
+        "y": 480,
+        "wires": [
+            [
+                "e947008011049fcb",
+                "ee7b3a5b17599e79"
+            ]
+        ]
+    },
+    {
+        "id": "9d361afe200cb84f",
+        "type": "ui_audio",
+        "z": "d838b4da5bd7b4ee",
+        "name": "",
+        "group": "a9fa5578717d132e",
+        "voice": "Microsoft Stefanos - Greek (Greece)",
+        "always": true,
+        "x": 780,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "e947008011049fcb",
+        "type": "ui_audio",
+        "z": "d838b4da5bd7b4ee",
+        "name": "",
+        "group": "a9fa5578717d132e",
+        "voice": "Microsoft Stefanos - Greek (Greece)",
+        "always": true,
+        "x": 760,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "12fdd6bb23323466",
+        "type": "ui_toast",
+        "z": "d838b4da5bd7b4ee",
+        "position": "top right",
+        "displayTime": "3",
+        "highlight": "",
+        "sendall": true,
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "raw": false,
+        "className": "",
+        "topic": "",
+        "name": "",
+        "x": 950,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "03f390dedb789d17",
+        "type": "switch",
+        "z": "d838b4da5bd7b4ee",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "0",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 290,
+        "y": 340,
+        "wires": [
+            [
+                "f7e4a181c38014bb"
+            ],
+            [
+                "a2665792c2f9bb5b",
+                "f7e4a181c38014bb"
+            ]
+        ]
+    },
+    {
+        "id": "51bf08761767e607",
+        "type": "change",
+        "z": "d838b4da5bd7b4ee",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.value",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 140,
+        "y": 340,
+        "wires": [
+            [
+                "03f390dedb789d17"
+            ]
+        ]
+    },
+    {
+        "id": "3efab4a79ab1c2cc",
+        "type": "change",
+        "z": "d838b4da5bd7b4ee",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Η πόρτα του ψυγείου ανοιξε!",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 780,
+        "y": 220,
+        "wires": [
+            [
+                "da5b5d5f8d2cbc44"
+            ]
+        ]
+    },
+    {
+        "id": "ee7b3a5b17599e79",
+        "type": "change",
+        "z": "d838b4da5bd7b4ee",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Η πόρτα του ψυγειου έκλεισε!",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 760,
+        "y": 440,
+        "wires": [
+            [
+                "3878f9b7400f3423"
+            ]
+        ]
+    },
+    {
+        "id": "8c4fb0053e7ecab4",
+        "type": "debug",
+        "z": "d838b4da5bd7b4ee",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1100,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "8ed4cdf7024b0490",
+        "type": "debug",
+        "z": "d838b4da5bd7b4ee",
+        "name": "debug 5",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1080,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "28ef3a1816c002e1",
+        "type": "link in",
+        "z": "d838b4da5bd7b4ee",
+        "name": "link in 12",
+        "links": [
+            "1bcddda4d2cb38f0"
+        ],
+        "x": 205,
+        "y": 160,
+        "wires": [
+            [
+                "51bf08761767e607"
+            ]
+        ]
+    },
+    {
+        "id": "da5b5d5f8d2cbc44",
+        "type": "template",
+        "z": "d838b4da5bd7b4ee",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "Time:{{{global.timestamp}}}  {{payload}}",
+        "output": "str",
+        "x": 960,
+        "y": 220,
+        "wires": [
+            [
+                "8c4fb0053e7ecab4"
+            ]
+        ]
+    },
+    {
+        "id": "3878f9b7400f3423",
+        "type": "template",
+        "z": "d838b4da5bd7b4ee",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "Time:{{{global.timestamp}}}  {{payload}}",
+        "output": "str",
+        "x": 920,
+        "y": 440,
+        "wires": [
+            [
+                "8ed4cdf7024b0490"
+            ]
+        ]
+    },
+    {
         "id": "be0f1c7392c46098",
         "type": "ui_group",
         "name": "Default",
@@ -2038,7 +2002,7 @@
         "hidden": false
     },
     {
-        "id": "bd620bdf9d5f2ad1",
+        "id": "f50fa2169c08dc95",
         "type": "global-config",
         "env": [],
         "modules": {
@@ -2046,3 +2010,6 @@
         }
     }
 ]
+
+
+               

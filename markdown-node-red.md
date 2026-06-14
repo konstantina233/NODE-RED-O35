@@ -483,11 +483,11 @@
         "type": "trigger",
         "z": "d838b4da5bd7b4ee",
         "name": "",
-        "op1": "Η πόρτα μόλις άνοιξε.",
+        "op1": "",
         "op2": "Κλείσε την πόρτα του ψυγείου.",
-        "op1type": "str",
+        "op1type": "nul",
         "op2type": "str",
-        "duration": "5",
+        "duration": "11",
         "extend": false,
         "overrideDelay": false,
         "units": "s",
@@ -495,12 +495,12 @@
         "bytopic": "all",
         "topic": "topic",
         "outputs": 1,
-        "x": 520,
-        "y": 280,
+        "x": 590,
+        "y": 320,
         "wires": [
             [
                 "9d361afe200cb84f",
-                "3efab4a79ab1c2cc"
+                "8c4fb0053e7ecab4"
             ]
         ]
     },
@@ -514,7 +514,7 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "Η πόρτα μόλις έκλεισε",
+                "to": "Η πόρτα του ψυγείου έκλεισε!",
                 "tot": "str"
             }
         ],
@@ -538,10 +538,10 @@
         "z": "d838b4da5bd7b4ee",
         "name": "",
         "group": "a9fa5578717d132e",
-        "voice": "Microsoft Stefanos - Greek (Greece)",
+        "voice": "Microsoft Mark - English (United States)",
         "always": true,
-        "x": 780,
-        "y": 340,
+        "x": 840,
+        "y": 360,
         "wires": []
     },
     {
@@ -550,7 +550,7 @@
         "z": "d838b4da5bd7b4ee",
         "name": "",
         "group": "a9fa5578717d132e",
-        "voice": "Microsoft Stefanos - Greek (Greece)",
+        "voice": "Microsoft Mark - English (United States)",
         "always": true,
         "x": 760,
         "y": 520,
@@ -601,6 +601,7 @@
         "y": 340,
         "wires": [
             [
+                "3efab4a79ab1c2cc",
                 "f7e4a181c38014bb"
             ],
             [
@@ -655,7 +656,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 780,
+        "x": 660,
         "y": 220,
         "wires": [
             [
@@ -702,7 +703,7 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1100,
+        "x": 1080,
         "y": 220,
         "wires": []
     },
@@ -750,8 +751,8 @@
         "syntax": "mustache",
         "template": "Time:{{{global.timestamp}}}  {{payload}}",
         "output": "str",
-        "x": 960,
-        "y": 220,
+        "x": 900,
+        "y": 180,
         "wires": [
             [
                 "8c4fb0053e7ecab4"
@@ -796,18 +797,18 @@
             {
                 "t": "eq",
                 "v": "1",
-                "vt": "num"
+                "vt": "str"
             },
             {
                 "t": "eq",
                 "v": "0",
-                "vt": "num"
+                "vt": "str"
             }
         ],
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 370,
+        "x": 450,
         "y": 160,
         "wires": [
             [
@@ -816,52 +817,6 @@
             [
                 "f254c73e15197063"
             ]
-        ]
-    },
-    {
-        "id": "245b69bb0d83c4b2",
-        "type": "inject",
-        "z": "dd0c96f039fa0a45",
-        "name": "Αισθητήρας",
-        "props": [
-            {
-                "p": "payload"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "1",
-        "payloadType": "num",
-        "x": 210,
-        "y": 480,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "608a1da5b9320394",
-        "type": "trigger",
-        "z": "dd0c96f039fa0a45",
-        "name": "Άνοιγμα/κλείσιμο",
-        "op1": "",
-        "op2": "",
-        "op1type": "pay",
-        "op2type": "payl",
-        "duration": "5",
-        "extend": true,
-        "overrideDelay": false,
-        "units": "s",
-        "reset": "",
-        "bytopic": "all",
-        "topic": "topic",
-        "outputs": 1,
-        "x": 850,
-        "y": 380,
-        "wires": [
-            []
         ]
     },
     {
@@ -892,7 +847,7 @@
         "syntax": "mustache",
         "template": "Time:{{{global.timestamp}}} Η γκαραζόπορτα άνοιξε!",
         "output": "str",
-        "x": 580,
+        "x": 700,
         "y": 80,
         "wires": [
             [
@@ -911,24 +866,12 @@
         "syntax": "mustache",
         "template": "Time:{{{global.timestamp}}} Η γκαραζόπορτα έκλεισε!",
         "output": "str",
-        "x": 560,
+        "x": 720,
         "y": 240,
         "wires": [
             [
                 "2fdd4d200f036c9d"
             ]
-        ]
-    },
-    {
-        "id": "1e16381a3b2fd2ea",
-        "type": "link in",
-        "z": "dd0c96f039fa0a45",
-        "name": "link in 1",
-        "links": [],
-        "x": 75,
-        "y": 480,
-        "wires": [
-            []
         ]
     },
     {
@@ -1819,29 +1762,6 @@
         ]
     },
     {
-        "id": "e492bb3a57a5974c",
-        "type": "inject",
-        "z": "c5b301b17b75a51b",
-        "name": "Αισθητήρας Κίνησης",
-        "props": [
-            {
-                "p": "payload"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "1",
-        "payloadType": "num",
-        "x": 370,
-        "y": 720,
-        "wires": [
-            []
-        ]
-    },
-    {
         "id": "8d1440ef34423595",
         "type": "ui_audio",
         "z": "c5b301b17b75a51b",
@@ -1906,7 +1826,7 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "Προσοχή! Ανιχνεύθηκε παραβίαση στην κύρια είσοδο. Το σύστημα ασφαλείας βρίσκεται σε κατάσταση συναγερμού.",
+                "to": "Η πόρτα εισόδου άνοιξε!",
                 "tot": "str"
             }
         ],
@@ -1934,7 +1854,7 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "Ειδοποίηση συστήματος. Η είσοδος ασφαλίστηκε. Επαναφορά σε κατάσταση αναμονής.",
+                "to": "Ειδοποίηση συστήματος. Η πόρτα εισόδου έκλεισε!",
                 "tot": "str"
             }
         ],
@@ -2007,7 +1927,7 @@
         "hidden": false
     },
     {
-        "id": "c8dc9d682afcd4f6",
+        "id": "9fa4395eed02b470",
         "type": "global-config",
         "env": [],
         "modules": {

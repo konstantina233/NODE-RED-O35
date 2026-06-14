@@ -265,7 +265,9 @@
         "z": "caa0099ca9e73e15",
         "name": "link out 11",
         "mode": "link",
-        "links": [],
+        "links": [
+            "d25128de86177337"
+        ],
         "x": 1155,
         "y": 320,
         "wires": []
@@ -333,6 +335,798 @@
         "y": 500,
         "wires": [
             []
+        ]
+    },
+    {
+        "id": "b8151c571b3ac7c7",
+        "type": "tab",
+        "label": "αισθητηρας φωτεινοτητας",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "2c8494a2645cb74e",
+        "type": "change",
+        "z": "b8151c571b3ac7c7",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "$log10(payload + 1)",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 440,
+        "y": 240,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "660bf76a25693e23",
+        "type": "range",
+        "z": "b8151c571b3ac7c7",
+        "minin": "0",
+        "maxin": "100000",
+        "minout": "10",
+        "maxout": "100",
+        "action": "clamp",
+        "round": true,
+        "property": "payload",
+        "name": "",
+        "x": 580,
+        "y": 80,
+        "wires": [
+            [
+                "770ea81625024d21"
+            ]
+        ]
+    },
+    {
+        "id": "b89ea0ca05cc9fdc",
+        "type": "debug",
+        "z": "b8151c571b3ac7c7",
+        "name": "debug 4",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 960,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "26ee173d4260549c",
+        "type": "change",
+        "z": "b8151c571b3ac7c7",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.value",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 300,
+        "y": 80,
+        "wires": [
+            [
+                "660bf76a25693e23"
+            ]
+        ]
+    },
+    {
+        "id": "770ea81625024d21",
+        "type": "template",
+        "z": "b8151c571b3ac7c7",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "Time:{{{global.timestamp}}},Φωτεινότητα οθόνης: {{payload}} %",
+        "output": "str",
+        "x": 780,
+        "y": 80,
+        "wires": [
+            [
+                "b89ea0ca05cc9fdc"
+            ]
+        ]
+    },
+    {
+        "id": "d25128de86177337",
+        "type": "link in",
+        "z": "b8151c571b3ac7c7",
+        "name": "link in 11",
+        "links": [
+            "ce69737438182db9"
+        ],
+        "x": 145,
+        "y": 80,
+        "wires": [
+            [
+                "26ee173d4260549c"
+            ]
+        ]
+    },
+    {
+        "id": "d838b4da5bd7b4ee",
+        "type": "tab",
+        "label": "πορτα ψυγειου",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "f7e4a181c38014bb",
+        "type": "trigger",
+        "z": "d838b4da5bd7b4ee",
+        "name": "",
+        "op1": "Η πόρτα μόλις άνοιξε.",
+        "op2": "Κλείσε την πόρτα του ψυγείου.",
+        "op1type": "str",
+        "op2type": "str",
+        "duration": "5",
+        "extend": false,
+        "overrideDelay": false,
+        "units": "s",
+        "reset": "0",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 520,
+        "y": 280,
+        "wires": [
+            [
+                "9d361afe200cb84f",
+                "3efab4a79ab1c2cc"
+            ]
+        ]
+    },
+    {
+        "id": "a2665792c2f9bb5b",
+        "type": "change",
+        "z": "d838b4da5bd7b4ee",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Η πόρτα μόλις έκλεισε",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 460,
+        "y": 480,
+        "wires": [
+            [
+                "e947008011049fcb",
+                "ee7b3a5b17599e79"
+            ]
+        ]
+    },
+    {
+        "id": "9d361afe200cb84f",
+        "type": "ui_audio",
+        "z": "d838b4da5bd7b4ee",
+        "name": "",
+        "group": "a9fa5578717d132e",
+        "voice": "Microsoft Stefanos - Greek (Greece)",
+        "always": true,
+        "x": 780,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "e947008011049fcb",
+        "type": "ui_audio",
+        "z": "d838b4da5bd7b4ee",
+        "name": "",
+        "group": "a9fa5578717d132e",
+        "voice": "Microsoft Stefanos - Greek (Greece)",
+        "always": true,
+        "x": 760,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "12fdd6bb23323466",
+        "type": "ui_toast",
+        "z": "d838b4da5bd7b4ee",
+        "position": "top right",
+        "displayTime": "3",
+        "highlight": "",
+        "sendall": true,
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "raw": false,
+        "className": "",
+        "topic": "",
+        "name": "",
+        "x": 950,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "03f390dedb789d17",
+        "type": "switch",
+        "z": "d838b4da5bd7b4ee",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "0",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 290,
+        "y": 340,
+        "wires": [
+            [
+                "f7e4a181c38014bb"
+            ],
+            [
+                "a2665792c2f9bb5b",
+                "f7e4a181c38014bb"
+            ]
+        ]
+    },
+    {
+        "id": "51bf08761767e607",
+        "type": "change",
+        "z": "d838b4da5bd7b4ee",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.value",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 140,
+        "y": 340,
+        "wires": [
+            [
+                "03f390dedb789d17"
+            ]
+        ]
+    },
+    {
+        "id": "3efab4a79ab1c2cc",
+        "type": "change",
+        "z": "d838b4da5bd7b4ee",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Η πόρτα του ψυγείου ανοιξε!",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 780,
+        "y": 220,
+        "wires": [
+            [
+                "da5b5d5f8d2cbc44"
+            ]
+        ]
+    },
+    {
+        "id": "ee7b3a5b17599e79",
+        "type": "change",
+        "z": "d838b4da5bd7b4ee",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Η πόρτα του ψυγειου έκλεισε!",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 760,
+        "y": 440,
+        "wires": [
+            [
+                "3878f9b7400f3423"
+            ]
+        ]
+    },
+    {
+        "id": "8c4fb0053e7ecab4",
+        "type": "debug",
+        "z": "d838b4da5bd7b4ee",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1100,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "8ed4cdf7024b0490",
+        "type": "debug",
+        "z": "d838b4da5bd7b4ee",
+        "name": "debug 5",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1080,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "28ef3a1816c002e1",
+        "type": "link in",
+        "z": "d838b4da5bd7b4ee",
+        "name": "link in 12",
+        "links": [
+            "1bcddda4d2cb38f0"
+        ],
+        "x": 205,
+        "y": 160,
+        "wires": [
+            [
+                "51bf08761767e607"
+            ]
+        ]
+    },
+    {
+        "id": "da5b5d5f8d2cbc44",
+        "type": "template",
+        "z": "d838b4da5bd7b4ee",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "Time:{{{global.timestamp}}}  {{payload}}",
+        "output": "str",
+        "x": 960,
+        "y": 220,
+        "wires": [
+            [
+                "8c4fb0053e7ecab4"
+            ]
+        ]
+    },
+    {
+        "id": "3878f9b7400f3423",
+        "type": "template",
+        "z": "d838b4da5bd7b4ee",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "Time:{{{global.timestamp}}}  {{payload}}",
+        "output": "str",
+        "x": 920,
+        "y": 440,
+        "wires": [
+            [
+                "8ed4cdf7024b0490"
+            ]
+        ]
+    },
+    {
+        "id": "dd0c96f039fa0a45",
+        "type": "tab",
+        "label": "γκαραζοπορτα",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "1a077c5862cc52b8",
+        "type": "switch",
+        "z": "dd0c96f039fa0a45",
+        "name": "Έλεγχοσ κίνησης",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "num"
+            },
+            {
+                "t": "eq",
+                "v": "0",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 370,
+        "y": 160,
+        "wires": [
+            [
+                "6e31468a4527a60a"
+            ],
+            [
+                "f254c73e15197063"
+            ]
+        ]
+    },
+    {
+        "id": "245b69bb0d83c4b2",
+        "type": "inject",
+        "z": "dd0c96f039fa0a45",
+        "name": "Αισθητήρας",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "1",
+        "payloadType": "num",
+        "x": 210,
+        "y": 480,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "608a1da5b9320394",
+        "type": "trigger",
+        "z": "dd0c96f039fa0a45",
+        "name": "Άνοιγμα/κλείσιμο",
+        "op1": "",
+        "op2": "",
+        "op1type": "pay",
+        "op2type": "payl",
+        "duration": "5",
+        "extend": true,
+        "overrideDelay": false,
+        "units": "s",
+        "reset": "",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 850,
+        "y": 380,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2fdd4d200f036c9d",
+        "type": "debug",
+        "z": "dd0c96f039fa0a45",
+        "name": "Γκαζαρόπορτα",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1020,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "6e31468a4527a60a",
+        "type": "template",
+        "z": "dd0c96f039fa0a45",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "Time:{{{global.timestamp}}} Η γκαραζόπορτα άνοιξε!",
+        "output": "str",
+        "x": 580,
+        "y": 80,
+        "wires": [
+            [
+                "2fdd4d200f036c9d"
+            ]
+        ]
+    },
+    {
+        "id": "f254c73e15197063",
+        "type": "template",
+        "z": "dd0c96f039fa0a45",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "Time:{{{global.timestamp}}} Η γκαραζόπορτα έκλεισε!",
+        "output": "str",
+        "x": 560,
+        "y": 240,
+        "wires": [
+            [
+                "2fdd4d200f036c9d"
+            ]
+        ]
+    },
+    {
+        "id": "1e16381a3b2fd2ea",
+        "type": "link in",
+        "z": "dd0c96f039fa0a45",
+        "name": "link in 1",
+        "links": [],
+        "x": 75,
+        "y": 480,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2d28c6c6086aabcd",
+        "type": "link in",
+        "z": "dd0c96f039fa0a45",
+        "name": "link in 10",
+        "links": [
+            "94f8aba5a07e2b9b"
+        ],
+        "x": 65,
+        "y": 160,
+        "wires": [
+            [
+                "417613ef65f062c2"
+            ]
+        ]
+    },
+    {
+        "id": "417613ef65f062c2",
+        "type": "change",
+        "z": "dd0c96f039fa0a45",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.value",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 180,
+        "y": 160,
+        "wires": [
+            [
+                "1a077c5862cc52b8"
+            ]
+        ]
+    },
+    {
+        "id": "e0ca0aec1e745e97",
+        "type": "tab",
+        "label": "αισθητηρας καπνου",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "147da0322137df67",
+        "type": "switch",
+        "z": "e0ca0aec1e745e97",
+        "name": "value>350?",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "gt",
+                "v": "350",
+                "vt": "num"
+            },
+            {
+                "t": "lte",
+                "v": "350",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 670,
+        "y": 80,
+        "wires": [
+            [
+                "cfd2c7e462b71c13"
+            ],
+            [
+                "0fa3acba363efe12"
+            ]
+        ]
+    },
+    {
+        "id": "903fc43ad310b912",
+        "type": "change",
+        "z": "e0ca0aec1e745e97",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.value",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 460,
+        "y": 80,
+        "wires": [
+            [
+                "147da0322137df67"
+            ]
+        ]
+    },
+    {
+        "id": "fcec449da84666a2",
+        "type": "debug",
+        "z": "e0ca0aec1e745e97",
+        "name": "debug 3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1020,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "cfd2c7e462b71c13",
+        "type": "template",
+        "z": "e0ca0aec1e745e97",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "Time:{{{global.timestamp}}} ΠΡΟΣΟΧΗ: Ανιχνεύθηκε καπνός! Η τιμή είναι: {{payload}}",
+        "output": "str",
+        "x": 880,
+        "y": 80,
+        "wires": [
+            [
+                "fcec449da84666a2"
+            ]
+        ]
+    },
+    {
+        "id": "0fa3acba363efe12",
+        "type": "template",
+        "z": "e0ca0aec1e745e97",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "Time:{{{global.timestamp}}}, smoke value: {{payload}}, status:normal",
+        "output": "str",
+        "x": 840,
+        "y": 140,
+        "wires": [
+            [
+                "a44fcbdb5f65cda6"
+            ]
+        ]
+    },
+    {
+        "id": "a44fcbdb5f65cda6",
+        "type": "debug",
+        "z": "e0ca0aec1e745e97",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 940,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "538ca9d73d69e032",
+        "type": "link in",
+        "z": "e0ca0aec1e745e97",
+        "name": "link in 8",
+        "links": [
+            "cf2bb4e0a912e8fd"
+        ],
+        "x": 275,
+        "y": 80,
+        "wires": [
+            [
+                "903fc43ad310b912"
+            ]
         ]
     },
     {
@@ -570,760 +1364,6 @@
                 "7b1ebd228568d198"
             ]
         ]
-    },
-    {
-        "id": "b8151c571b3ac7c7",
-        "type": "tab",
-        "label": "αισθητηρας φωτεινοτητας",
-        "disabled": false,
-        "info": "",
-        "env": []
-    },
-    {
-        "id": "2c8494a2645cb74e",
-        "type": "change",
-        "z": "b8151c571b3ac7c7",
-        "name": "",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "$log10(payload + 1)",
-                "tot": "jsonata"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 440,
-        "y": 240,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "660bf76a25693e23",
-        "type": "range",
-        "z": "b8151c571b3ac7c7",
-        "minin": "0",
-        "maxin": "100000",
-        "minout": "10",
-        "maxout": "100",
-        "action": "clamp",
-        "round": true,
-        "property": "payload",
-        "name": "",
-        "x": 580,
-        "y": 80,
-        "wires": [
-            [
-                "770ea81625024d21"
-            ]
-        ]
-    },
-    {
-        "id": "b89ea0ca05cc9fdc",
-        "type": "debug",
-        "z": "b8151c571b3ac7c7",
-        "name": "debug 4",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 960,
-        "y": 80,
-        "wires": []
-    },
-    {
-        "id": "d25128de86177337",
-        "type": "link in",
-        "z": "b8151c571b3ac7c7",
-        "name": "link in 11",
-        "links": [],
-        "x": 65,
-        "y": 80,
-        "wires": [
-            [
-                "26ee173d4260549c"
-            ]
-        ]
-    },
-    {
-        "id": "26ee173d4260549c",
-        "type": "change",
-        "z": "b8151c571b3ac7c7",
-        "name": "",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "payload.value",
-                "tot": "msg"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 300,
-        "y": 80,
-        "wires": [
-            [
-                "660bf76a25693e23"
-            ]
-        ]
-    },
-    {
-        "id": "770ea81625024d21",
-        "type": "template",
-        "z": "b8151c571b3ac7c7",
-        "name": "",
-        "field": "payload",
-        "fieldType": "msg",
-        "format": "handlebars",
-        "syntax": "mustache",
-        "template": "Time:{{{global.timestamp}}},Φωτεινότητα οθόνης: {{payload}} %",
-        "output": "str",
-        "x": 780,
-        "y": 80,
-        "wires": [
-            [
-                "b89ea0ca05cc9fdc"
-            ]
-        ]
-    },
-    {
-        "id": "e0ca0aec1e745e97",
-        "type": "tab",
-        "label": "αισθητηρας καπνου",
-        "disabled": false,
-        "info": "",
-        "env": []
-    },
-    {
-        "id": "147da0322137df67",
-        "type": "switch",
-        "z": "e0ca0aec1e745e97",
-        "name": "value>350?",
-        "property": "payload",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "gt",
-                "v": "350",
-                "vt": "num"
-            },
-            {
-                "t": "lte",
-                "v": "350",
-                "vt": "num"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 2,
-        "x": 670,
-        "y": 80,
-        "wires": [
-            [
-                "cfd2c7e462b71c13"
-            ],
-            [
-                "0fa3acba363efe12"
-            ]
-        ]
-    },
-    {
-        "id": "903fc43ad310b912",
-        "type": "change",
-        "z": "e0ca0aec1e745e97",
-        "name": "",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "payload.value",
-                "tot": "msg"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 460,
-        "y": 80,
-        "wires": [
-            [
-                "147da0322137df67"
-            ]
-        ]
-    },
-    {
-        "id": "fcec449da84666a2",
-        "type": "debug",
-        "z": "e0ca0aec1e745e97",
-        "name": "debug 3",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1020,
-        "y": 120,
-        "wires": []
-    },
-    {
-        "id": "cfd2c7e462b71c13",
-        "type": "template",
-        "z": "e0ca0aec1e745e97",
-        "name": "",
-        "field": "payload",
-        "fieldType": "msg",
-        "format": "handlebars",
-        "syntax": "mustache",
-        "template": "Time:{{{global.timestamp}}} ΠΡΟΣΟΧΗ: Ανιχνεύθηκε καπνός! Η τιμή είναι: {{payload}}",
-        "output": "str",
-        "x": 880,
-        "y": 80,
-        "wires": [
-            [
-                "fcec449da84666a2"
-            ]
-        ]
-    },
-    {
-        "id": "0fa3acba363efe12",
-        "type": "template",
-        "z": "e0ca0aec1e745e97",
-        "name": "",
-        "field": "payload",
-        "fieldType": "msg",
-        "format": "handlebars",
-        "syntax": "mustache",
-        "template": "Time:{{{global.timestamp}}}, smoke value: {{payload}}, status:normal",
-        "output": "str",
-        "x": 840,
-        "y": 140,
-        "wires": [
-            [
-                "a44fcbdb5f65cda6"
-            ]
-        ]
-    },
-    {
-        "id": "a44fcbdb5f65cda6",
-        "type": "debug",
-        "z": "e0ca0aec1e745e97",
-        "name": "debug 1",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 940,
-        "y": 200,
-        "wires": []
-    },
-    {
-        "id": "538ca9d73d69e032",
-        "type": "link in",
-        "z": "e0ca0aec1e745e97",
-        "name": "link in 8",
-        "links": [
-            "cf2bb4e0a912e8fd"
-        ],
-        "x": 275,
-        "y": 80,
-        "wires": [
-            [
-                "903fc43ad310b912"
-            ]
-        ]
-    },
-    {
-        "id": "dd0c96f039fa0a45",
-        "type": "tab",
-        "label": "γκαραζοπορτα",
-        "disabled": false,
-        "info": "",
-        "env": []
-    },
-    {
-        "id": "1a077c5862cc52b8",
-        "type": "switch",
-        "z": "dd0c96f039fa0a45",
-        "name": "Έλεγχοσ κίνησης",
-        "property": "payload",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "1",
-                "vt": "num"
-            },
-            {
-                "t": "eq",
-                "v": "0",
-                "vt": "num"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 2,
-        "x": 370,
-        "y": 160,
-        "wires": [
-            [
-                "6e31468a4527a60a"
-            ],
-            [
-                "f254c73e15197063"
-            ]
-        ]
-    },
-    {
-        "id": "245b69bb0d83c4b2",
-        "type": "inject",
-        "z": "dd0c96f039fa0a45",
-        "name": "Αισθητήρας",
-        "props": [
-            {
-                "p": "payload"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "1",
-        "payloadType": "num",
-        "x": 210,
-        "y": 480,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "608a1da5b9320394",
-        "type": "trigger",
-        "z": "dd0c96f039fa0a45",
-        "name": "Άνοιγμα/κλείσιμο",
-        "op1": "",
-        "op2": "",
-        "op1type": "pay",
-        "op2type": "payl",
-        "duration": "5",
-        "extend": true,
-        "overrideDelay": false,
-        "units": "s",
-        "reset": "",
-        "bytopic": "all",
-        "topic": "topic",
-        "outputs": 1,
-        "x": 850,
-        "y": 380,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "2fdd4d200f036c9d",
-        "type": "debug",
-        "z": "dd0c96f039fa0a45",
-        "name": "Γκαζαρόπορτα",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1020,
-        "y": 180,
-        "wires": []
-    },
-    {
-        "id": "6e31468a4527a60a",
-        "type": "template",
-        "z": "dd0c96f039fa0a45",
-        "name": "",
-        "field": "payload",
-        "fieldType": "msg",
-        "format": "handlebars",
-        "syntax": "mustache",
-        "template": "Time:{{{global.timestamp}}} Η γκαραζόπορτα άνοιξε!",
-        "output": "str",
-        "x": 580,
-        "y": 80,
-        "wires": [
-            [
-                "2fdd4d200f036c9d"
-            ]
-        ]
-    },
-    {
-        "id": "f254c73e15197063",
-        "type": "template",
-        "z": "dd0c96f039fa0a45",
-        "name": "",
-        "field": "payload",
-        "fieldType": "msg",
-        "format": "handlebars",
-        "syntax": "mustache",
-        "template": "Time:{{{global.timestamp}}} Η γκαραζόπορτα έκλεισε!",
-        "output": "str",
-        "x": 560,
-        "y": 240,
-        "wires": [
-            [
-                "2fdd4d200f036c9d"
-            ]
-        ]
-    },
-    {
-        "id": "1e16381a3b2fd2ea",
-        "type": "link in",
-        "z": "dd0c96f039fa0a45",
-        "name": "link in 1",
-        "links": [],
-        "x": 75,
-        "y": 480,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "2d28c6c6086aabcd",
-        "type": "link in",
-        "z": "dd0c96f039fa0a45",
-        "name": "link in 10",
-        "links": [
-            "94f8aba5a07e2b9b"
-        ],
-        "x": 65,
-        "y": 160,
-        "wires": [
-            [
-                "417613ef65f062c2"
-            ]
-        ]
-    },
-    {
-        "id": "417613ef65f062c2",
-        "type": "change",
-        "z": "dd0c96f039fa0a45",
-        "name": "",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "payload.value",
-                "tot": "msg"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 180,
-        "y": 160,
-        "wires": [
-            [
-                "1a077c5862cc52b8"
-            ]
-        ]
-    },
-    {
-        "id": "c5b301b17b75a51b",
-        "type": "tab",
-        "label": "αισθητηρας κινησης",
-        "disabled": false,
-        "info": "",
-        "env": []
-    },
-    {
-        "id": "b89eb7df89635bee",
-        "type": "trigger",
-        "z": "c5b301b17b75a51b",
-        "name": "",
-        "op1": "",
-        "op2": "",
-        "op1type": "pay",
-        "op2type": "nul",
-        "duration": "1",
-        "extend": false,
-        "overrideDelay": false,
-        "units": "s",
-        "reset": "",
-        "bytopic": "all",
-        "topic": "topic",
-        "outputs": 1,
-        "x": 380,
-        "y": 100,
-        "wires": [
-            [
-                "7fc8c7bba7fba29e"
-            ]
-        ]
-    },
-    {
-        "id": "d5d339866df9fe7a",
-        "type": "template",
-        "z": "c5b301b17b75a51b",
-        "name": "",
-        "field": "payload",
-        "fieldType": "msg",
-        "format": "handlebars",
-        "syntax": "mustache",
-        "template": "Time:{{{global.timestamp}}}  {{payload}}",
-        "output": "str",
-        "x": 860,
-        "y": 300,
-        "wires": [
-            [
-                "7e0cd05c78074892"
-            ]
-        ]
-    },
-    {
-        "id": "ad2371945a01709b",
-        "type": "debug",
-        "z": "c5b301b17b75a51b",
-        "name": "dashboard",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1070,
-        "y": 80,
-        "wires": []
-    },
-    {
-        "id": "7fc8c7bba7fba29e",
-        "type": "switch",
-        "z": "c5b301b17b75a51b",
-        "name": "",
-        "property": "payload",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "1",
-                "vt": "num"
-            },
-            {
-                "t": "eq",
-                "v": "0",
-                "vt": "num"
-            }
-        ],
-        "checkall": "false",
-        "repair": false,
-        "outputs": 2,
-        "x": 490,
-        "y": 160,
-        "wires": [
-            [
-                "81c67afdd5a21e9d"
-            ],
-            [
-                "4d3e8f2a56e6d382"
-            ]
-        ]
-    },
-    {
-        "id": "a3d67dd35599aa86",
-        "type": "template",
-        "z": "c5b301b17b75a51b",
-        "name": "",
-        "field": "payload",
-        "fieldType": "msg",
-        "format": "handlebars",
-        "syntax": "mustache",
-        "template": "Time:{{{global.timestamp}}}  {{payload}}",
-        "output": "str",
-        "x": 900,
-        "y": 80,
-        "wires": [
-            [
-                "ad2371945a01709b"
-            ]
-        ]
-    },
-    {
-        "id": "e492bb3a57a5974c",
-        "type": "inject",
-        "z": "c5b301b17b75a51b",
-        "name": "Αισθητήρας Κίνησης",
-        "props": [
-            {
-                "p": "payload"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "1",
-        "payloadType": "num",
-        "x": 370,
-        "y": 720,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "8d1440ef34423595",
-        "type": "ui_audio",
-        "z": "c5b301b17b75a51b",
-        "name": "",
-        "group": "be0f1c7392c46098",
-        "voice": "Microsoft Zira - English (United States)",
-        "always": true,
-        "x": 940,
-        "y": 180,
-        "wires": []
-    },
-    {
-        "id": "140cd892096018c1",
-        "type": "link in",
-        "z": "c5b301b17b75a51b",
-        "name": "link in 9",
-        "links": [
-            "df8a16fe3a128eb6"
-        ],
-        "x": 155,
-        "y": 280,
-        "wires": [
-            [
-                "606e25c6fe80daeb"
-            ]
-        ]
-    },
-    {
-        "id": "606e25c6fe80daeb",
-        "type": "change",
-        "z": "c5b301b17b75a51b",
-        "name": "",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "payload.value",
-                "tot": "msg"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 220,
-        "y": 200,
-        "wires": [
-            [
-                "b89eb7df89635bee"
-            ]
-        ]
-    },
-    {
-        "id": "81c67afdd5a21e9d",
-        "type": "change",
-        "z": "c5b301b17b75a51b",
-        "name": "",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "Προσοχή! Ανιχνεύθηκε παραβίαση στην κύρια είσοδο. Το σύστημα ασφαλείας βρίσκεται σε κατάσταση συναγερμού.",
-                "tot": "str"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 680,
-        "y": 80,
-        "wires": [
-            [
-                "8d1440ef34423595",
-                "a3d67dd35599aa86"
-            ]
-        ]
-    },
-    {
-        "id": "4d3e8f2a56e6d382",
-        "type": "change",
-        "z": "c5b301b17b75a51b",
-        "name": "",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "Ειδοποίηση συστήματος. Η είσοδος ασφαλίστηκε. Επαναφορά σε κατάσταση αναμονής.",
-                "tot": "str"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 620,
-        "y": 300,
-        "wires": [
-            [
-                "8d1440ef34423595",
-                "d5d339866df9fe7a"
-            ]
-        ]
-    },
-    {
-        "id": "7e0cd05c78074892",
-        "type": "debug",
-        "z": "c5b301b17b75a51b",
-        "name": "debug 6",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1040,
-        "y": 300,
-        "wires": []
     },
     {
         "id": "8da9c22f90d38586",
@@ -1657,114 +1697,78 @@
         "wires": []
     },
     {
-        "id": "d838b4da5bd7b4ee",
+        "id": "c5b301b17b75a51b",
         "type": "tab",
-        "label": "πορτα ψυγειου",
+        "label": "αισθητηρας κινησης",
         "disabled": false,
         "info": "",
         "env": []
     },
     {
-        "id": "f7e4a181c38014bb",
+        "id": "b89eb7df89635bee",
         "type": "trigger",
-        "z": "d838b4da5bd7b4ee",
+        "z": "c5b301b17b75a51b",
         "name": "",
-        "op1": "Η πόρτα μόλις άνοιξε.",
-        "op2": "Κλείσε την πόρτα του ψυγείου.",
-        "op1type": "str",
-        "op2type": "str",
-        "duration": "5",
+        "op1": "",
+        "op2": "",
+        "op1type": "pay",
+        "op2type": "nul",
+        "duration": "1",
         "extend": false,
         "overrideDelay": false,
         "units": "s",
-        "reset": "0",
+        "reset": "",
         "bytopic": "all",
         "topic": "topic",
         "outputs": 1,
-        "x": 520,
-        "y": 280,
+        "x": 380,
+        "y": 100,
         "wires": [
             [
-                "9d361afe200cb84f",
-                "3efab4a79ab1c2cc"
+                "7fc8c7bba7fba29e"
             ]
         ]
     },
     {
-        "id": "a2665792c2f9bb5b",
-        "type": "change",
-        "z": "d838b4da5bd7b4ee",
+        "id": "d5d339866df9fe7a",
+        "type": "template",
+        "z": "c5b301b17b75a51b",
         "name": "",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "Η πόρτα μόλις έκλεισε",
-                "tot": "str"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 460,
-        "y": 480,
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "Time:{{{global.timestamp}}}  {{payload}}",
+        "output": "str",
+        "x": 860,
+        "y": 300,
         "wires": [
             [
-                "e947008011049fcb",
-                "ee7b3a5b17599e79"
+                "7e0cd05c78074892"
             ]
         ]
     },
     {
-        "id": "9d361afe200cb84f",
-        "type": "ui_audio",
-        "z": "d838b4da5bd7b4ee",
-        "name": "",
-        "group": "a9fa5578717d132e",
-        "voice": "Microsoft Stefanos - Greek (Greece)",
-        "always": true,
-        "x": 780,
-        "y": 340,
+        "id": "ad2371945a01709b",
+        "type": "debug",
+        "z": "c5b301b17b75a51b",
+        "name": "dashboard",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1070,
+        "y": 80,
         "wires": []
     },
     {
-        "id": "e947008011049fcb",
-        "type": "ui_audio",
-        "z": "d838b4da5bd7b4ee",
-        "name": "",
-        "group": "a9fa5578717d132e",
-        "voice": "Microsoft Stefanos - Greek (Greece)",
-        "always": true,
-        "x": 760,
-        "y": 520,
-        "wires": []
-    },
-    {
-        "id": "12fdd6bb23323466",
-        "type": "ui_toast",
-        "z": "d838b4da5bd7b4ee",
-        "position": "top right",
-        "displayTime": "3",
-        "highlight": "",
-        "sendall": true,
-        "outputs": 0,
-        "ok": "OK",
-        "cancel": "",
-        "raw": false,
-        "className": "",
-        "topic": "",
-        "name": "",
-        "x": 950,
-        "y": 720,
-        "wires": []
-    },
-    {
-        "id": "03f390dedb789d17",
+        "id": "7fc8c7bba7fba29e",
         "type": "switch",
-        "z": "d838b4da5bd7b4ee",
+        "z": "c5b301b17b75a51b",
         "name": "",
         "property": "payload",
         "propertyType": "msg",
@@ -1772,33 +1776,102 @@
             {
                 "t": "eq",
                 "v": "1",
-                "vt": "str"
+                "vt": "num"
             },
             {
                 "t": "eq",
                 "v": "0",
-                "vt": "str"
+                "vt": "num"
             }
         ],
-        "checkall": "true",
+        "checkall": "false",
         "repair": false,
         "outputs": 2,
-        "x": 290,
-        "y": 340,
+        "x": 490,
+        "y": 160,
         "wires": [
             [
-                "f7e4a181c38014bb"
+                "81c67afdd5a21e9d"
             ],
             [
-                "a2665792c2f9bb5b",
-                "f7e4a181c38014bb"
+                "4d3e8f2a56e6d382"
             ]
         ]
     },
     {
-        "id": "51bf08761767e607",
+        "id": "a3d67dd35599aa86",
+        "type": "template",
+        "z": "c5b301b17b75a51b",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "Time:{{{global.timestamp}}}  {{payload}}",
+        "output": "str",
+        "x": 900,
+        "y": 80,
+        "wires": [
+            [
+                "ad2371945a01709b"
+            ]
+        ]
+    },
+    {
+        "id": "e492bb3a57a5974c",
+        "type": "inject",
+        "z": "c5b301b17b75a51b",
+        "name": "Αισθητήρας Κίνησης",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "1",
+        "payloadType": "num",
+        "x": 370,
+        "y": 720,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "8d1440ef34423595",
+        "type": "ui_audio",
+        "z": "c5b301b17b75a51b",
+        "name": "",
+        "group": "be0f1c7392c46098",
+        "voice": "Microsoft Zira - English (United States)",
+        "always": true,
+        "x": 940,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "140cd892096018c1",
+        "type": "link in",
+        "z": "c5b301b17b75a51b",
+        "name": "link in 9",
+        "links": [
+            "df8a16fe3a128eb6"
+        ],
+        "x": 155,
+        "y": 280,
+        "wires": [
+            [
+                "606e25c6fe80daeb"
+            ]
+        ]
+    },
+    {
+        "id": "606e25c6fe80daeb",
         "type": "change",
-        "z": "d838b4da5bd7b4ee",
+        "z": "c5b301b17b75a51b",
         "name": "",
         "rules": [
             {
@@ -1814,25 +1887,25 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 140,
-        "y": 340,
+        "x": 220,
+        "y": 200,
         "wires": [
             [
-                "03f390dedb789d17"
+                "b89eb7df89635bee"
             ]
         ]
     },
     {
-        "id": "3efab4a79ab1c2cc",
+        "id": "81c67afdd5a21e9d",
         "type": "change",
-        "z": "d838b4da5bd7b4ee",
+        "z": "c5b301b17b75a51b",
         "name": "",
         "rules": [
             {
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "Η πόρτα του ψυγείου ανοιξε!",
+                "to": "Προσοχή! Ανιχνεύθηκε παραβίαση στην κύρια είσοδο. Το σύστημα ασφαλείας βρίσκεται σε κατάσταση συναγερμού.",
                 "tot": "str"
             }
         ],
@@ -1841,25 +1914,26 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 780,
-        "y": 220,
+        "x": 680,
+        "y": 80,
         "wires": [
             [
-                "da5b5d5f8d2cbc44"
+                "8d1440ef34423595",
+                "a3d67dd35599aa86"
             ]
         ]
     },
     {
-        "id": "ee7b3a5b17599e79",
+        "id": "4d3e8f2a56e6d382",
         "type": "change",
-        "z": "d838b4da5bd7b4ee",
+        "z": "c5b301b17b75a51b",
         "name": "",
         "rules": [
             {
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "Η πόρτα του ψυγειου έκλεισε!",
+                "to": "Ειδοποίηση συστήματος. Η είσοδος ασφαλίστηκε. Επαναφορά σε κατάσταση αναμονής.",
                 "tot": "str"
             }
         ],
@@ -1868,19 +1942,20 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 760,
-        "y": 440,
+        "x": 620,
+        "y": 300,
         "wires": [
             [
-                "3878f9b7400f3423"
+                "8d1440ef34423595",
+                "d5d339866df9fe7a"
             ]
         ]
     },
     {
-        "id": "8c4fb0053e7ecab4",
+        "id": "7e0cd05c78074892",
         "type": "debug",
-        "z": "d838b4da5bd7b4ee",
-        "name": "debug 2",
+        "z": "c5b301b17b75a51b",
+        "name": "debug 6",
         "active": true,
         "tosidebar": true,
         "console": false,
@@ -1888,91 +1963,9 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1100,
-        "y": 220,
+        "x": 1040,
+        "y": 300,
         "wires": []
-    },
-    {
-        "id": "8ed4cdf7024b0490",
-        "type": "debug",
-        "z": "d838b4da5bd7b4ee",
-        "name": "debug 5",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1080,
-        "y": 440,
-        "wires": []
-    },
-    {
-        "id": "28ef3a1816c002e1",
-        "type": "link in",
-        "z": "d838b4da5bd7b4ee",
-        "name": "link in 12",
-        "links": [
-            "1bcddda4d2cb38f0"
-        ],
-        "x": 205,
-        "y": 160,
-        "wires": [
-            [
-                "51bf08761767e607"
-            ]
-        ]
-    },
-    {
-        "id": "da5b5d5f8d2cbc44",
-        "type": "template",
-        "z": "d838b4da5bd7b4ee",
-        "name": "",
-        "field": "payload",
-        "fieldType": "msg",
-        "format": "handlebars",
-        "syntax": "mustache",
-        "template": "Time:{{{global.timestamp}}}  {{payload}}",
-        "output": "str",
-        "x": 960,
-        "y": 220,
-        "wires": [
-            [
-                "8c4fb0053e7ecab4"
-            ]
-        ]
-    },
-    {
-        "id": "3878f9b7400f3423",
-        "type": "template",
-        "z": "d838b4da5bd7b4ee",
-        "name": "",
-        "field": "payload",
-        "fieldType": "msg",
-        "format": "handlebars",
-        "syntax": "mustache",
-        "template": "Time:{{{global.timestamp}}}  {{payload}}",
-        "output": "str",
-        "x": 920,
-        "y": 440,
-        "wires": [
-            [
-                "8ed4cdf7024b0490"
-            ]
-        ]
-    },
-    {
-        "id": "be0f1c7392c46098",
-        "type": "ui_group",
-        "name": "Default",
-        "tab": "c2d23f14e959d673",
-        "order": 1,
-        "disp": true,
-        "width": 6,
-        "collapse": false,
-        "className": ""
     },
     {
         "id": "a9fa5578717d132e",
@@ -1986,12 +1979,15 @@
         "className": ""
     },
     {
-        "id": "c2d23f14e959d673",
-        "type": "ui_tab",
-        "name": "Home",
-        "icon": "dashboard",
-        "disabled": false,
-        "hidden": false
+        "id": "be0f1c7392c46098",
+        "type": "ui_group",
+        "name": "Default",
+        "tab": "c2d23f14e959d673",
+        "order": 1,
+        "disp": true,
+        "width": 6,
+        "collapse": false,
+        "className": ""
     },
     {
         "id": "6eb2a24e3d52c08a",
@@ -2002,7 +1998,15 @@
         "hidden": false
     },
     {
-        "id": "f50fa2169c08dc95",
+        "id": "c2d23f14e959d673",
+        "type": "ui_tab",
+        "name": "Home",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "c8dc9d682afcd4f6",
         "type": "global-config",
         "env": [],
         "modules": {
@@ -2010,6 +2014,3 @@
         }
     }
 ]
-
-
-               
